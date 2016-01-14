@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES6"
+  },
+  "files": [
+    "node_modules/declarations/node/node.d.ts",
+    "index.ts"
+  ]
+}

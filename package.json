@@ -1,0 +1,31 @@
+{
+  "name": "http-extend",
+  "version": "0.0.0",
+  "description": "Promise-based typed enhancements for the Node.js standard library's http",
+  "keywords": [
+    "http",
+    "typed",
+    "promises",
+    "extensions"
+  ],
+  "homepage": "https://github.com/chbrown/http-extend",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chbrown/http-extend.git"
+  },
+  "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^5.0.0",
+    "coveralls": "*",
+    "declarations": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*",
+    "request": "*",
+    "typescript": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
