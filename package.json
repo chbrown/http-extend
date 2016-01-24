@@ -1,6 +1,6 @@
 {
   "name": "http-extend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Promise-based typed enhancements for the Node.js standard library's http",
   "keywords": [
     "http",
