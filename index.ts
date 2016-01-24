@@ -84,3 +84,22 @@ export function addUrlObj<Req extends IncomingMessage>(req: Req): Req & Url {
   let {protocol, auth, hostname, port, pathname, query, hash} = parseUrl(req.url, true);
   return Object.assign(req, {protocol, auth, hostname, port, pathname, query, hash});
 }
+
+/**
+Parse the 'Cookie' header of the request.
+*/
+export function addCookies<Req extends IncomingMessage>(req: Req): Req & {cookies: {[index: string]: string}} {
+  // IncomingMessage#headers is an object with all lowercased keys
+  let cookies: {[index: string]: string} = {};
+  let cookieHeader = req.headers.cookie;
+  if (cookieHeader) {
+    var cookieStrings = cookieHeader.split(/;\s*/);
+    cookieStrings.forEach(cookieString => {
+      var splitAt = cookieString.indexOf('=');
+      var name = cookieString.slice(0, splitAt);
+      var value = cookieString.slice(splitAt + 1);
+      cookies[name] = decodeURIComponent(value);
+    });
+  }
+  return Object.assign(req, {cookies});
+}
