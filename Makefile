@@ -1,11 +1,9 @@
 BIN := node_modules/.bin
 TYPESCRIPT := $(shell jq -r '.files[]' tsconfig.json | grep -Fv .d.ts)
-JAVASCRIPT := $(TYPESCRIPT:%.ts=%.js)
-MOCHA_ARGS := --compilers js:babel-core/register tests/
 
-all: $(JAVASCRIPT) $(TYPESCRIPT:%.ts=%.d.ts) .npmignore .gitignore
+all: $(TYPESCRIPT:%.ts=%.js) $(TYPESCRIPT:%.ts=%.d.ts) .npmignore .gitignore
 
-$(BIN)/tsc $(BIN)/_mocha $(BIN)/mocha $(BIN)/istanbul $(BIN)/coveralls:
+$(BIN)/tsc $(BIN)/_mocha $(BIN)/istanbul $(BIN)/coveralls:
 	npm install
 
 .npmignore: tsconfig.json
@@ -17,6 +15,6 @@ $(BIN)/tsc $(BIN)/_mocha $(BIN)/mocha $(BIN)/istanbul $(BIN)/coveralls:
 %.js %.d.ts: %.ts $(BIN)/tsc
 	$(BIN)/tsc -d
 
-test: $(JAVASCRIPT) $(BIN)/istanbul $(BIN)/_mocha $(BIN)/coveralls
-	$(BIN)/istanbul cover $(BIN)/_mocha -- $(MOCHA_ARGS) -R spec
+test: $(TYPESCRIPT:%.ts=%.js) $(BIN)/istanbul $(BIN)/_mocha $(BIN)/coveralls
+	$(BIN)/istanbul cover $(BIN)/_mocha -- --compilers js:babel-core/register tests/ -R spec
 	cat coverage/lcov.info | $(BIN)/coveralls || true
