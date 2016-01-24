@@ -7,7 +7,7 @@ $(BIN)/tsc $(BIN)/_mocha $(BIN)/istanbul $(BIN)/coveralls:
 	npm install
 
 .npmignore: tsconfig.json
-	echo $(TYPESCRIPT) Makefile tsconfig.json | tr ' ' '\n' > $@
+	echo $(TYPESCRIPT) Makefile tsconfig.json coverage/ | tr ' ' '\n' > $@
 
 .gitignore: tsconfig.json
 	echo $(TYPESCRIPT:%.ts=%.js) $(TYPESCRIPT:%.ts=%.d.ts) coverage/ | tr ' ' '\n' > $@
