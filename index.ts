@@ -51,9 +51,7 @@ export function addXhr<Req extends IncomingMessage>(req: Req): Req & {xhr: boole
   let xhr = (req.headers['x-requested-with'] == 'XMLHttpRequest') ||
             /\.json$/.test(req.url) ||
             !/text\/html/.test(req.headers['accept']);
-  // if the second case is true, remove the ".json" extension
-  let url = req.url.replace(/\.json$/, '');
-  return Object.assign(req, {xhr, url});
+  return Object.assign(req, {xhr});
 }
 
 /**
