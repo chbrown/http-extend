@@ -16,17 +16,10 @@
   "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^5.0.0",
-    "coveralls": "*",
     "declarations": "*",
-    "istanbul": "*",
-    "mocha": "*",
-    "mocha-lcov-reporter": "*",
-    "request": "*",
     "typescript": "*"
   },
   "scripts": {
-    "prepublish": "make",
-    "test": "make test"
+    "prepublish": "make"
   }
 }
