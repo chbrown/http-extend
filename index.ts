@@ -1,3 +1,4 @@
+"use strict;"
 import {parse as parseUrl} from 'url';
 import {parse as parseQuerystring} from 'querystring';
 import {IncomingMessage} from 'http';
