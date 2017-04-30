@@ -16,8 +16,8 @@
   "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
   "license": "MIT",
   "devDependencies": {
-    "declarations": "*",
-    "typescript": "*"
+    "declarations": "0.1.11",
+    "typescript": "1.8.9"
   },
   "scripts": {
     "prepublish": "make"
