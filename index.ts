@@ -91,7 +91,8 @@ export function addCookies<Req extends IncomingMessage>(req: Req): Req & {cookie
   let cookies: {[index: string]: string} = {};
   let cookieHeader = req.headers.cookie;
   if (cookieHeader) {
-    var cookieStrings = cookieHeader.split(/;\s*/);
+    var cookieHeaderString = Array.isArray(cookieHeader) ? cookieHeader.join(';') : cookieHeader;
+    var cookieStrings = cookieHeaderString.split(/;\s*/);
     cookieStrings.forEach(cookieString => {
       var splitAt = cookieString.indexOf('=');
       var name = cookieString.slice(0, splitAt);
