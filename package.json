@@ -9,17 +9,14 @@
     "extensions"
   ],
   "homepage": "https://github.com/chbrown/http-extend",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chbrown/http-extend.git"
-  },
+  "repository": "github:chbrown/http-extend",
   "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
   "license": "MIT",
   "devDependencies": {
-    "declarations": "0.1.11",
-    "typescript": "1.8.9"
+    "@types/node": "10.9.4",
+    "typescript": "3.0.3"
   },
   "scripts": {
-    "prepublish": "make"
+    "prepare": "tsc -d"
   }
 }
