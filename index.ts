@@ -12,12 +12,12 @@ Otherwise, return a Buffer.
 
 When parsing as JSON or querystring, assumes the content encoding is UTF-8.
 */
-export function addBody<Req extends IncomingMessage>(req: Req): Promise<Req & {body: any}> {
+export async function addBody<Req extends IncomingMessage>(req: Req): Promise<Req & {body: any}> {
   // TODO: short-circuit on bodyless requests
   const contentType = req.headers['content-type'] || '';
   const contentEncoding = 'utf8';
   return new Promise<Buffer>((resolve, reject) => {
-    var chunks = [];
+    const chunks = [];
     return req
     .on('error', reject)
     .on('data', chunk => chunks.push(chunk))
@@ -48,9 +48,9 @@ req.xhr == true indicates that the response should be JSON.
 */
 export function addXhr<Req extends IncomingMessage>(req: Req): Req & {xhr: boolean} {
   // TODO: use the pathname, not the url
-  let xhr = (req.headers['x-requested-with'] == 'XMLHttpRequest') ||
-            /\.json$/.test(req.url) ||
-            !/text\/html/.test(req.headers['accept']);
+  const xhr = (req.headers['x-requested-with'] == 'XMLHttpRequest') ||
+              /\.json$/.test(req.url) ||
+              !/text\/html/.test(req.headers.accept);
   return Object.assign(req, {xhr});
 }
 
@@ -79,7 +79,7 @@ export interface Url {
 Add a subset of the parsed NodeJS.Url object to the request.
 */
 export function addUrlObj<Req extends IncomingMessage>(req: Req): Req & Url {
-  let {protocol, auth, hostname, port, pathname, query, hash} = parseUrl(req.url, true);
+  const {protocol, auth, hostname, port, pathname, query, hash} = parseUrl(req.url, true);
   return Object.assign(req, {protocol, auth, hostname, port, pathname, query, hash});
 }
 
@@ -88,15 +88,15 @@ Parse the 'Cookie' header of the request.
 */
 export function addCookies<Req extends IncomingMessage>(req: Req): Req & {cookies: {[index: string]: string}} {
   // IncomingMessage#headers is an object with all lowercased keys
-  let cookies: {[index: string]: string} = {};
-  let cookieHeader = req.headers.cookie;
+  const cookies: {[index: string]: string} = {};
+  const cookieHeader = req.headers.cookie;
   if (cookieHeader) {
-    var cookieHeaderString = Array.isArray(cookieHeader) ? cookieHeader.join(';') : cookieHeader;
-    var cookieStrings = cookieHeaderString.split(/;\s*/);
+    const cookieHeaderString = Array.isArray(cookieHeader) ? cookieHeader.join(';') : cookieHeader;
+    const cookieStrings = cookieHeaderString.split(/;\s*/);
     cookieStrings.forEach(cookieString => {
-      var splitAt = cookieString.indexOf('=');
-      var name = cookieString.slice(0, splitAt);
-      var value = cookieString.slice(splitAt + 1);
+      const splitAt = cookieString.indexOf('=');
+      const name = cookieString.slice(0, splitAt);
+      const value = cookieString.slice(splitAt + 1);
       cookies[name] = decodeURIComponent(value);
     });
   }
