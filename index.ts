@@ -17,10 +17,10 @@ export async function addBody<Req extends IncomingMessage>(req: Req): Promise<Re
   const contentType = req.headers['content-type'] || ''
   const contentEncoding = 'utf8'
   return new Promise<Buffer>((resolve, reject) => {
-    const chunks = []
+    const chunks: Buffer[] = []
     return req
     .on('error', reject)
-    .on('data', chunk => chunks.push(chunk))
+    .on('data', (chunk: Buffer) => chunks.push(chunk))
     .on('end', () => resolve(Buffer.concat(chunks)))
   })
   .then(data => {
