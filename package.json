@@ -17,6 +17,7 @@
     "typescript": "3.1.1"
   },
   "scripts": {
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "clean": "tsc -b --clean"
   }
 }
