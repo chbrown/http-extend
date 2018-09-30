@@ -28,7 +28,7 @@ export async function addBody<Req extends IncomingMessage>(req: Req): Promise<Re
       // empty body translates to undefined
       return (data.length > 0) ? JSON.parse(data.toString(contentEncoding)) : undefined
     }
-    else if (contentType.match(/application\/x-www-form-urlencoded/i)) {
+    else if (/application\/x-www-form-urlencoded/i.test(contentType)) {
       return parseQuerystring(data.toString(contentEncoding))
     }
     return data
